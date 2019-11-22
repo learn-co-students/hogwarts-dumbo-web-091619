@@ -47,7 +47,7 @@ export default class Hog extends Component {
             paragraph = <div><br /><p>Specialty: {this.props.hog.specialty}</p><p> Greased? {this.props.hog.greased ? "Yes" : "No"}</p><p> Weight: {this.props.hog.weight}</p></div>
         }
         if(!hidden){
-            return <div className="ui eight wide column" onClick={this.handleClick} name={this.props.hog.name}><button onClick={this.hideThisPig}>Hide This Pig!</button><br /><img src={thisHogsPicture}></img><br />Name: {this.props.hog.name}{paragraph}</div>
+            return <div className="ui eight wide column card" onClick={this.handleClick} name={this.props.hog.name}><button onClick={this.hideThisPig}>Hide This Pig!</button><br /><img src={thisHogsPicture}></img><br />Name: {this.props.hog.name}{paragraph}</div>
         } else {
             return <button onClick={this.hideThisPig}>Reveal This Pig!</button>
         }
