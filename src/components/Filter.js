@@ -3,8 +3,8 @@ import React from 'react'
 const Filter = (props) => {
     
 	return (
-		<div className="filterWrapper">
-			<div className="ui menu">
+		<div >
+			<div>
 					<button onClick={props.toggleFilter}>
 				            GREASY BOYS ONLY?!
                     </button>
