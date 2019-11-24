@@ -8,7 +8,7 @@ import Filter from './Filter'
 class App extends Component {
   constructor(){
     super()
-    this.state = {
+    this.state = 
       hogs: hogs,
       greaseFilter: false,
       sortBy: ""
