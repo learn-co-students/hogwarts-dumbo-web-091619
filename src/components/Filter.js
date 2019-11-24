@@ -10,7 +10,7 @@ const Filter = (props) => {
                     </button>
                     <label>Current Grease Status: {`${props.greaseFilter}`}</label>
                     <select onChange={props.handleSelectChange} value={props.sortBy}>
-                        <option value="Select">Select: </option>
+                        <option value="Select">No Sort? </option>
                         <option value="name">Sort the Boys by Name?</option>
                         <option value="weight">Sort the Boys by Weight?</option>
                     </select>
