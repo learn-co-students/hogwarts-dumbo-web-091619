@@ -45,17 +45,14 @@ class App extends Component {
     let previouslyFiltered = this.filterHogs()
     switch (this.state.sortBy) {
       case "weight":
-          console.log("changed to weight!")
         return previouslyFiltered.sort((a, b) => {
-          return a.weight - b.weight
+          return b.weight - a.weight
         })
       case "name":
-          console.log("changed to name!")
         return previouslyFiltered.sort((a, b) => {
           return a.name.localeCompare(b.name)
         })
       default:
-        console.log("all the boys!")
         return previouslyFiltered
     }
   }
