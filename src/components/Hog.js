@@ -11,7 +11,7 @@ class Hog extends React.Component{
         this.getImgSrc = this.getImgSrc.bind(this)
         // this.showDeets = this.showDeets.bind(this)
       }
-      
+
        
       getImgSrc(){
         let hogFilename = this.props.hog.name.split(' ').join('_').toLowerCase()

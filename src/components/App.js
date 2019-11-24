@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import '../App.css';
+import React, { Component } from 'react'
+import '../App.css'
 import Nav from './Nav'
-import hogs from '../porkers_data';
+import hogs from '../porkers_data'
 import HogsIndex from './HogsIndex'
 import Filter from './Filter'
 
@@ -10,10 +10,13 @@ class App extends Component {
     super()
     this.state = {
       hogs: hogs,
-      greaseFilter: false
+      greaseFilter: false,
+      sortBy: ""
     }
     this.toggleFilter = this.toggleFilter.bind(this)
     this.filterHogs = this.filterHogs.bind(this)
+    this.handleSelectChange = this.handleSelectChange.bind(this)
+    this.sortHogs = this.sortHogs.bind(this)
   }
 
   toggleFilter(){
@@ -23,7 +26,7 @@ class App extends Component {
     console.log("state toggled!")
   }
 
-  filterHogs(hogs){
+  filterHogs(){
     if(!!this.state.greaseFilter){
       
       return hogs.filter(hog => hog.greased)
@@ -32,12 +35,36 @@ class App extends Component {
       return hogs
     }
   }
+
+
+  handleSelectChange(event){
+    this.setState({ sortBy: event.target.value })
+  }
+
+  sortHogs(){
+    let previouslyFiltered = this.filterHogs()
+    switch (this.state.sortBy) {
+      case "weight":
+          console.log("changed to weight!")
+        return previouslyFiltered.sort((a, b) => {
+          return a.weight - b.weight
+        })
+      case "name":
+          console.log("changed to name!")
+        return previouslyFiltered.sort((a, b) => {
+          return a.name.localeCompare(b.name)
+        })
+      default:
+        console.log("all the boys!")
+        return previouslyFiltered
+    }
+  }
   render() {
     return (
       <div className="App">
           < Nav />
-          < Filter toggleFilter={this.toggleFilter} greaseFilter={this.state.greaseFilter}/>
-          <HogsIndex hogs={this.filterHogs(hogs)}/>
+          < Filter toggleFilter={this.toggleFilter} greaseFilter={this.state.greaseFilter} handleSelectChange={this.handleSelectChange}/>
+          <HogsIndex hogs={this.sortHogs()}/>
           <div className="ui grid container">
           <div className="ui eight wide column">
             {HogsIndex}
@@ -48,4 +75,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
