@@ -1,15 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Sort extends Component {
-	handleClick = event => {
-		this.props.sortBy(event.target)
+export default function Sort(props) {
+	const handleClick = event => {
+		props.sortBy(event.target)
 	}
 
-	render() {
-		return (
-			<div>
-				<button onClick={this.handleClick}>{this.props.buttonName}</button>
-			</div>
-		)
-	}
+	return (
+		<div>
+			<button onClick={handleClick}>{props.buttonName}</button>
+		</div>
+	)
 }

@@ -47,7 +47,6 @@ class App extends Component {
 					toggleFilter={this.toggleFilter}
 					toggleName={this.toggleName}
 				/>
-
 				<HogContainer hogs={this.renderHogs()} />
 			</div>
 		)
