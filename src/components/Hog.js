@@ -13,41 +13,26 @@ export default class Hog extends Component {
     }
 
     handleClick = () => {
-        //change display of a component
-        if(this.state.isDisplayed === false){
-            this.setState({
-                isDisplayed: true
-            })
-        } else {
-            this.setState({
-                isDisplayed: false
-            })
-        }
+        this.setState({
+            isDisplayed: !this.state.isDisplayed
+        })
     }
 
     hideThisPig = () => {
-        if (this.state.hide === false) {
-            this.setState({
-                hide: true
-            })
-        } else {
-            this.setState({
-                hide: false
-            })
-        }
+        this.setState({
+            hide: !this.state.hide
+        })
     }
 
 
     render(){
-        const isDisplayed = this.state.isDisplayed
         const thisHogsPicture = this.getPictureName(this.props.hog.name)
-        const hidden = this.state.hide
         let paragraph;
-        if (isDisplayed){
+        if (this.state.isDisplayed){
             paragraph = <div><br /><p>Specialty: {this.props.hog.specialty}</p><p> Greased? {this.props.hog.greased ? "Yes" : "No"}</p><p> Weight: {this.props.hog.weight}</p></div>
         }
-        if(!hidden){
-            return <div className="ui eight wide column card" onClick={this.handleClick} name={this.props.hog.name}><button onClick={this.hideThisPig}>Hide This Pig!</button><br /><img src={thisHogsPicture}></img><br />Name: {this.props.hog.name}{paragraph}</div>
+        if(!this.state.hide){
+            return <div className="ui eight wide column card" onClick={this.handleClick} name={this.props.hog.name}><button onClick={this.hideThisPig}>Hide This Pig!</button><br /><img src={thisHogsPicture} alt={`${this.props.hog.name} hog`}></img><br />Name: {this.props.hog.name}{paragraph}</div>
         } else {
             return <button onClick={this.hideThisPig}>Reveal This Pig!</button>
         }

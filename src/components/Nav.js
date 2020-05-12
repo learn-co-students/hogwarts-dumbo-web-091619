@@ -5,14 +5,6 @@ import React from 'react'
 
 const Nav = (props) => {
 
-
-
-
-
-
-
-
-
 	return (
 		<div className="navWrapper">
 			<span className="headerText">Hogwarts</span>

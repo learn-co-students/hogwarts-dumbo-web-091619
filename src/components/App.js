@@ -8,64 +8,36 @@ class App extends Component {
 
   state = {
     isGreased: false,
-    sortedName: false,
-    sortedWeight: false
+    sortBy: null
   }
 
   handleClickGreased = () => {
-    if(this.state.isGreased === false){
-      this.setState({
-        isGreased: true
-      })
-    } else {
-      this.setState({
-        isGreased: false
-      })
-    }
-    
+    this.setState({
+      isGreased: !this.state.isGreased
+    })
   }
 
-    handleClickName = () => {
-      if (this.state.sortedName === false) {
-        this.setState({
-        sortedName: true
-        })
-
-      } else {
-        this.setState({
-        sortedName  : false
-        })
-      }
-    }
-
-  handleClickWeight = () => {
-    if (this.state.sortedWeight === false) {
-      this.setState({
-        sortedWeight: true
-      })
-    } else {
-      this.setState({
-        sortedWeight: false
-      })
-    }
+  handleSortChange = (event) => {
+    this.setState({
+      sortBy: event.target.value
+    })
   }
-  
 
 
   render() {
-
-    const greased = hogs.filter((hog) => {
+    const greased = [...hogs].filter((hog) => {
       return hog.greased === true
     })
 
     const hogsOnPage = (theseHogs) => {
-      if(this.state.sortedName === true){
-        theseHogs.sort((a,b)=> (a.name > b.name) ? 1: -1)
+      let sortedHogs = [...theseHogs]
+      if(this.state.sortBy === "name"){
+        sortedHogs.sort((a,b)=> (a.name > b.name) ? 1: -1)
       }
-      if (this.state.sortedWeight === true) {
-        theseHogs.sort((a, b) => (a.weight > b.weight) ? 1 : -1)
+      if(this.state.sortBy === "weight"){
+        sortedHogs.sort((a, b) => (a.weight > b.weight) ? 1 : -1)
       }
-      return theseHogs.map((hog) => (
+      return sortedHogs.map((hog) => (
         <li><div><Hog hog={hog} key={hog.id} /></div><br /></li>
       ))
     }
@@ -75,11 +47,17 @@ class App extends Component {
 
     return (
       <div className="App">
-          < Nav hogs={hogs} />
-        <button onClick={this.handleClickGreased}>Filter By Greased? {this.state.isGreased ? "True" : "False"}</button>
-        <button onClick={this.handleClickName}>Sort By Name</button>
-        <button onClick={this.handleClickWeight}>Sort By Weight</button>
-      <div><br /><br /></div>
+        < Nav hogs={hogs} />
+        <h4>Filter By Greased:</h4>
+        <button onClick={this.handleClickGreased}>{this.state.isGreased ? "True" : "False"}</button>
+        <br />
+        <h4>Sort By:</h4>
+        <select value={this.state.sortBy} onChange={this.handleSortChange}>
+        <option value="null">Don't Sort</option>
+          <option value="name">Sort By Name</option>
+          <option value="weight">Sort By Weight</option>
+        </select>
+        <div><br /><br /></div>
           <ul className="ui grid container">
             {this.state.isGreased ? hogTilesGreased:hogTiles}
           </ul>
