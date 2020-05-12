@@ -8,7 +8,7 @@ class App extends Component {
 
   state = {
     isGreased: false,
-    sortBy: null
+    sortBy: ""
   }
 
   handleClickGreased = () => {
@@ -37,8 +37,8 @@ class App extends Component {
       if(this.state.sortBy === "weight"){
         sortedHogs.sort((a, b) => (a.weight > b.weight) ? 1 : -1)
       }
-      return sortedHogs.map((hog) => (
-        <li><div><Hog hog={hog} key={hog.id} /></div><br /></li>
+      return sortedHogs.map((hog, index) => (
+        <li key={index}><div><Hog hog={hog} /></div><br /></li>
       ))
     }
   
@@ -53,7 +53,7 @@ class App extends Component {
         <br />
         <h4>Sort By:</h4>
         <select value={this.state.sortBy} onChange={this.handleSortChange}>
-        <option value="null">Don't Sort</option>
+        <option value="">Don't Sort</option>
           <option value="name">Sort By Name</option>
           <option value="weight">Sort By Weight</option>
         </select>
