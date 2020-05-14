@@ -3,7 +3,7 @@ import React from 'react'
 
 
 
-const Nav = (props) => {
+const Nav = () => {
 
 	return (
 		<div className="navWrapper">

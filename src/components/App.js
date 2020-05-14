@@ -23,31 +23,28 @@ class App extends Component {
     })
   }
 
+  hogsOnPage = (theseHogs) => {
+    let sortedHogs = [...theseHogs]
+    if(this.state.sortBy === "name"){
+      sortedHogs.sort((a,b)=> (a.name > b.name) ? 1: -1)
+    }
+    if(this.state.sortBy === "weight"){
+      sortedHogs.sort((a, b) => (a.weight > b.weight) ? 1 : -1)
+    }
+    return sortedHogs.map((hog, index) => (
+      <li key={index}><div><Hog hog={hog} /></div><br /></li>
+    ))
+  }
+
 
   render() {
     const greased = [...hogs].filter((hog) => {
       return hog.greased === true
     })
 
-    const hogsOnPage = (theseHogs) => {
-      let sortedHogs = [...theseHogs]
-      if(this.state.sortBy === "name"){
-        sortedHogs.sort((a,b)=> (a.name > b.name) ? 1: -1)
-      }
-      if(this.state.sortBy === "weight"){
-        sortedHogs.sort((a, b) => (a.weight > b.weight) ? 1 : -1)
-      }
-      return sortedHogs.map((hog, index) => (
-        <li key={index}><div><Hog hog={hog} /></div><br /></li>
-      ))
-    }
-  
-    const hogTiles = hogsOnPage(hogs)
-    const hogTilesGreased = hogsOnPage(greased)
-
     return (
       <div className="App">
-        < Nav hogs={hogs} />
+        < Nav/>
         <h4>Filter By Greased:</h4>
         <button onClick={this.handleClickGreased}>{this.state.isGreased ? "True" : "False"}</button>
         <br />
@@ -59,7 +56,7 @@ class App extends Component {
         </select>
         <div><br /><br /></div>
           <ul className="ui grid container">
-            {this.state.isGreased ? hogTilesGreased:hogTiles}
+            {this.state.isGreased ? this.hogsOnPage(hogs):this.hogsOnPage(greased)}
           </ul>
       </div>
     )
